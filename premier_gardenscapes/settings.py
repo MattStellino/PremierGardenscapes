@@ -25,7 +25,7 @@ if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
 
 # Debug settings
 DEBUG = True  # Set to False in production
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['premiergardenscapes.onrender.com']
 
 # Installed apps
 INSTALLED_APPS = [
