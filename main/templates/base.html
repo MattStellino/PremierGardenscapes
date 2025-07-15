@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Premier Gardenscapes{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lekton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+    <style>
+        body {
+            font-family: 'Oswald', serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background-color: white !important;
+            z-index: 1000;
+            min-height: 100px;
+            padding: 1rem 0;
+            transition: top 0.3s;
+        }
+        .navbar-brand-text {
+            font-size: 2.2rem;
+            color: black;
+        }
+        .navbar-nav .nav-link {
+            color: black;
+            font-size: 1.5rem;
+        }
+        .navbar-toggler {
+            border-color: black;
+            border: none;
+            background: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='black' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' /%3E%3C/svg%3E");
+        }
+        .logo-overlay {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            padding-left: 15px;
+            z-index: 2;
+        }
+        section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* Responsive: Hide mobile nav on large screens */
+        @media (min-width: 992px) {
+            #mobileNav {
+                display: none !important;
+            }
+        }
+        /* Section styles */
+        #about, #services, #gallery, #contact {
+            width: 100%;
+            min-height: 100vh;
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+            scroll-snap-align: start;
+            transition: background-color 0.6s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-image">
+
+<!-- Modal for Gallery Images -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content bg-dark text-center position-relative" style="border: none; box-shadow: none;">
+            <button type="button" class="close position-absolute"
+                    data-dismiss="modal" aria-label="Close"
+                    style="top: 10px; right: 20px; font-size: 3rem; color: white; background: none; border: none; z-index: 99999;">
+                &times;
+            </button>
+            <img id="modalImage" src="" class="img-fluid rounded mx-auto d-block"
+                 alt="Fullscreen Image" style="max-height: 90vh; object-fit: contain;">
+        </div>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid d-flex justify-content-between align-items-center position-relative">
+        <!-- Logo Left -->
+        <a href="/" class="d-none d-lg-flex align-items-center text-white text-decoration-none logo-overlay">
+            <img src="{% static 'main/images/logo.png' %}" alt="Logo" style="height: 70px; width: auto; margin-right: 10px;">
+            <span class="navbar-brand-text">PREMIER GARDENSCAPES</span>
+        </a>
+        <!-- Centered Nav -->
+        <div class="mx-auto text-center d-none d-lg-block">
+            <ul class="navbar-nav flex-row justify-content-center" style="gap: 50px;">
+                <li class="nav-item"><a class="nav-link" href="#about">ABOUT</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">SERVICES</a></li>
+                <li class="nav-item"><a class="nav-link" href="#gallery">GALLERY</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">QUOTE</a></li>
+            </ul>
+        </div>
+        <!-- Mobile toggler -->
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#mobileNav"
+                aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <!-- Mobile nav -->
+    <div class="collapse navbar-collapse d-lg-none" id="mobileNav">
+        <ul class="navbar-nav w-100 text-center mt-3" style="font-size: 1.5rem;">
+            <li class="nav-item border-bottom py-3"><a class="nav-link" href="/">HOME</a></li>
+            <li class="nav-item border-bottom py-3"><a class="nav-link" href="#about">ABOUT</a></li>
+            <li class="nav-item border-bottom py-3"><a class="nav-link" href="#services">SERVICES</a></li>
+            <li class="nav-item border-bottom py-3"><a class="nav-link" href="#gallery">GALLERY</a></li>
+            <li class="nav-item border-bottom py-3"><a class="nav-link" href="#contact">QUOTE</a></li>
+        </ul>
+    </div>
+</nav>
+
+<footer class="footer bg-white text-center py-3 border-top fixed-bottom" style="font-family: 'Oswald', sans-serif; font-size: 1.08rem; color: #000;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-6 text-md-left text-center mb-2 mb-md-0">
+        &copy; 2024 Premier Gardenscapes
+      </div>
+      <div class="col-12 col-md-6 text-md-right text-center">
+        <a href="mailto:premiergardenscapes@gmail.com" class="mx-2 text-dark" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.instagram.com/premier_gardenscapes/" class="mx-2 text-dark" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/people/Premier-Gardenscapes/pfbid02NtqQTHuf8Wf1e5uYYRqVk64SaBupjgmqeD4DM9apCwvQsBuAuj95wfvp1G1Vt5hyl/" class="mx-2 text-dark" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<!-- Main Content -->
+{% block content %}
+{% endblock %}
+
+<!-- Bootstrap & jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- Contact Form AJAX -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm");
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const responseBox = document.getElementById("formResponse");
+
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+                body: formData
+            })
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newContact = doc.querySelector("#contact");
+                document.getElementById("contact").innerHTML = newContact.innerHTML;
+                window.location.hash = "contact";
+            })
+            .catch(err => {
+                responseBox.className = "alert alert-danger";
+                responseBox.innerText = "There was an error sending your message.";
+                responseBox.classList.remove("d-none");
+            });
+        });
+    }
+});
+</script>
+
+<!-- Section Scroll Animation -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const faders = document.querySelectorAll(".section-fade");
+    const appearOptions = { threshold: 0.3 };
+    const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+});
+</script>
+
+<!-- Auto-Close Mobile Nav on Link Click -->
+<script>
+$(function () {
+    $('.navbar-nav .nav-link').on('click', function () {
+        $('.navbar-collapse').collapse('hide');
+    });
+});
+</script>
+
+<!-- Navbar Hide on Scroll (Modern App Bar Effect) -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var navbar = document.querySelector('.navbar');
+    var lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 80) {
+            navbar.style.top = "-120px";
+        } else {
+            navbar.style.top = "0";
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+});
+</script>
+<script>
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+        this.classList.remove('pulse'); // reset if fast click
+        void this.offsetWidth; // trigger reflow
+        this.classList.add('pulse');
+    });
+});
+</script>
+
+</body>
+</html>

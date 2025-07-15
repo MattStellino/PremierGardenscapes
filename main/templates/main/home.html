@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_class %}bg-image{% endblock %}
+
+{% block content %}
+<div class="top-section d-flex justify-content-center align-items-center min-vh-100 section-fade">
+    <div class="home-card text-center">
+        <img src="{% static 'main/images/logo.png' %}" alt="Premier Gardenscapes Logo" class="d-block mx-auto mb-4" style="width: 350px; height: auto;">
+        <h1>Welcome to Premier Gardenscapes</h1>
+        <p>
+            Transform your garden into a beautiful and functional space. We provide top-notch landscaping and property maintenance services tailored to your needs.
+        </p>
+        <a href="#contact" class="btn quote-button mt-3 mb-2">Get a Quote</a>
+    </div>
+</div>
+
+<div style="width: 100vw; position: relative;">
+  <svg viewBox="0 0 1440 150" style="display: block; width: 100%; height: 120x;">
+    <path fill="#637068" 
+          d="M0,90 C300,130 1140,30 1440,90 L1440,150 L0,150 Z"></path>
+  </svg>
+</div>
+
+
+{% include 'main/about.html' %}
+{% include 'main/services.html' %}
+{% include 'main/gallery.html' %}
+{% include 'main/contact.html' %}
+{% endblock %}
