@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div id="gallery" style="background-color: rgb(99, 112, 104); width: 100%;">
+<div class="page-section" id="gallery" style="background-color: rgb(99, 112, 104); width: 100%;">
   <div class="gallery-card">
     <h1 class="text-center mb-4">Gallery</h1>
     <hr class="section-divider mb-4">
@@ -43,4 +43,10 @@
 </script>
 
 
+<script>
+  function showImageModal(src) {
+    document.getElementById('modalImage').src = src;
+    $('#imageModal').modal('show');
+  }
+</script>
 {% endblock %}
