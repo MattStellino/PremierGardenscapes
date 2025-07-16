@@ -4,7 +4,7 @@
 {% block body_class %}bg-image{% endblock %}
 
 {% block content %}
-<div class="top-section d-flex justify-content-center align-items-center min-vh-100 section-fade">
+<div class="top-section section-fade">
     <div class="home-card text-center">
         <img src="{% static 'main/images/logo.png' %}" alt="Premier Gardenscapes Logo" class="d-block mx-auto mb-4" style="width: 350px; height: auto;">
         <h1>Welcome to Premier Gardenscapes</h1>
@@ -16,12 +16,11 @@
 </div>
 
 <div style="width: 100vw; position: relative;">
-  <svg viewBox="0 0 1440 150" style="display: block; width: 100%; height: 120x;">
+  <svg class="curved-divider" viewBox="0 0 1440 150">
     <path fill="#637068" 
           d="M0,90 C300,130 1140,30 1440,90 L1440,150 L0,150 Z"></path>
   </svg>
 </div>
-
 
 {% include 'main/about.html' %}
 {% include 'main/services.html' %}

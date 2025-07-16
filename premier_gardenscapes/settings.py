@@ -25,7 +25,10 @@ if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
 
 # Debug settings
 DEBUG = True  # Set to False in production
-ALLOWED_HOSTS = ['premiergardenscapes.onrender.com']
+ALLOWED_HOSTS = ['premiergardenscapes.onrender.com',
+                 'localhost',    
+                 '127.0.0.1'    
+                 ]
 
 # Installed apps
 INSTALLED_APPS = [
@@ -97,7 +100,7 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
