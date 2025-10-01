@@ -1,0 +1,475 @@
+/* ======================= LANDSCAPING CARD DESIGN SYSTEM ======================= */
+
+/* CSS Variables for Theme Tokens */
+/* Fix variables scope */
+:root {
+  /* Color Palette - Nature Inspired */
+  --ls-primary: #2d5a4a;      /* Deep forest green */
+  --ls-primary-light: #4a7c59; /* Medium green */
+  --ls-primary-lighter: #7a9b8a; /* Light sage */
+  --ls-accent: #4a7c59;       /* Medium green instead of brown */
+  --ls-accent-light: #7a9b8a; /* Light green instead of brown */
+  --ls-earth: #8b7355;        /* Natural brown */
+  --ls-sand: #f4e4c1;        /* Light sand */
+  --ls-cream: #faf8f3;       /* Off-white cream */
+  --ls-white: #ffffff;
+  
+  /* Shadows & Depth */
+  --ls-shadow-sm: 0 2px 8px rgba(45, 90, 74, 0.08);
+  --ls-shadow: 0 4px 16px rgba(45, 90, 74, 0.12);
+  --ls-shadow-lg: 0 8px 32px rgba(45, 90, 74, 0.18);
+  --ls-shadow-hover: 0 12px 40px rgba(45, 90, 74, 0.25);
+  
+  /* Spacing & Sizing */
+  --ls-radius: 16px;
+  --ls-radius-lg: 20px;
+  --ls-radius-xl: 24px;
+  --ls-spacing: 24px;
+  --ls-spacing-sm: 16px;
+  --ls-spacing-lg: 32px;
+  
+  /* Transitions */
+  --ls-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ls-transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ======================= BASE CARD STYLES ======================= */
+
+.card-landscape {
+  background: var(--ls-white);
+  border: none;
+  border-radius: var(--ls-radius-lg);
+  box-shadow: var(--ls-shadow);
+  transition: var(--ls-transition);
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-landscape:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ls-shadow-hover);
+}
+
+/* Card Media Section */
+.card-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--ls-primary-lighter) 0%, var(--ls-primary-light) 100%);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--ls-transition-slow);
+  loading: lazy;
+}
+
+.card-landscape:hover .card-media img {
+  transform: scale(1.05);
+}
+
+/* Card Body Section */
+.card-body {
+  padding: 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  color: #000000;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: var(--ls-spacing-sm);
+  line-height: 1.35;
+  font-family: 'Oswald', sans-serif;
+}
+
+.card-subtitle {
+  color: #000000;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: var(--ls-spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: 'Oswald', sans-serif;
+}
+
+.card-text {
+  color: #000000;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: var(--ls-spacing);
+  flex: 1;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Card Chips/Tags */
+.card-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--ls-spacing);
+}
+
+.card-chip {
+  background: var(--ls-primary-lighter);
+  color: #000000;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid rgba(45, 90, 74, 0.1);
+  transition: var(--ls-transition);
+}
+
+.card-chip:hover {
+  background: var(--ls-primary-light);
+  color: var(--ls-white);
+  transform: translateY(-1px);
+}
+
+/* Card Footer */
+.card-footer {
+  padding: 12px 18px;
+  background: linear-gradient(180deg, rgba(45,90,74,0.03), rgba(45,90,74,0));
+  border-top: 1px solid rgba(45, 90, 74, 0.08);
+  margin-top: auto;
+}
+
+/* Keep service card footer exactly as before */
+.card-landscape.service .card-footer {
+  background: #ffffff;
+}
+
+.card-actions {
+  display: flex;
+  gap: var(--ls-spacing-sm);
+  align-items: center;
+}
+
+.card-btn {
+  background: linear-gradient(135deg, var(--ls-primary) 0%, var(--ls-primary-light) 100%);
+  color: var(--ls-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--ls-radius);
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, background .3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-btn i { font-size: 0.95rem; }
+
+.card-btn:hover {
+  background: var(--ls-primary-light);
+  color: var(--ls-white);
+  transform: translateY(-2px);
+  box-shadow: var(--ls-shadow);
+}
+
+/* Keep service card buttons exactly as before */
+.card-landscape.service .card-btn {
+  background: var(--pg-gradient-accent) !important;
+  color: var(--pg-white) !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 999px !important;
+  font-weight: 500 !important;
+  font-family: 'Oswald', sans-serif !important;
+  text-decoration: none !important;
+  transition: all .3s ease !important;
+  box-shadow: var(--pg-shadow) !important;
+  letter-spacing: 0.5px !important;
+}
+
+.card-landscape.service .card-btn:hover {
+  background: linear-gradient(135deg, var(--pg-primary) 0%, var(--pg-accent) 100%) !important;
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: var(--pg-shadow-hover) !important;
+  color: var(--pg-white) !important;
+}
+
+.card-landscape.service .card-btn:active {
+  transform: translateY(-1px) scale(1.02) !important;
+}
+
+.card-btn.secondary {
+  background: transparent;
+  color: var(--ls-primary);
+  border: 2px solid var(--ls-primary);
+}
+
+.card-btn.secondary:hover {
+  background: var(--ls-primary);
+  color: var(--ls-white);
+}
+
+/* ======================= CARD VARIANTS ======================= */
+
+/* Brown Variant for Hardscaping - Updated to Green */
+.card-landscape.brown {
+  background: linear-gradient(135deg, #ffffff 0%, var(--ls-sand) 100%);
+}
+
+.card-landscape.brown .card-title {
+  color: #000000;
+}
+
+.card-landscape.brown .card-subtitle {
+  color: #000000;
+}
+
+.card-landscape.brown .card-text {
+  color: #000000;
+}
+
+.card-landscape.brown .card-footer {
+  background: rgba(45, 90, 74, 0.05); /* Changed from brown to green */
+  border-top-color: rgba(45, 90, 74, 0.1); /* Changed from brown to green */
+}
+
+/* Compact Variant */
+.card-landscape.compact .card-body {
+  padding: 12px;
+}
+
+.card-landscape.compact .card-title {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.card-landscape.compact .card-text {
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.card-landscape.compact .card-footer {
+  padding: 12px;
+}
+
+/* Service Card Variant */
+.card-landscape.service {
+  border-left: 8px solid var(--ls-primary);
+  background: var(--ls-white);
+  margin: 20px 0;
+}
+
+.card-landscape.service:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ls-shadow-hover);
+}
+
+/* FIXED: Ensure service cards have proper text contrast in green sections */
+.bg-modern-green .card-landscape.service {
+  background: var(--ls-white);
+  color: var(--ls-primary);
+}
+
+.bg-modern-green .card-landscape.service .card-title {
+  color: #000000;
+  font-weight: 600;
+}
+
+.bg-modern-green .card-landscape.service .card-subtitle {
+  color: #000000;
+  font-weight: 600;
+}
+
+.bg-modern-green .card-landscape.service .card-text {
+  color: #000000;
+  font-weight: 500;
+}
+
+.bg-modern-green .card-landscape.service .card-chip {
+  color: #000000;
+  background: rgba(45, 90, 74, 0.1);
+  border-color: rgba(45, 90, 74, 0.2);
+}
+
+/* Gallery Card Variant */
+.card-landscape.gallery {
+  background: linear-gradient(135deg, var(--ls-white) 0%, #ffffff 100%);
+}
+
+.card-landscape.gallery .card-media {
+  aspect-ratio: 4/3;
+}
+
+/* ======================= RESPONSIVE DESIGN ======================= */
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: var(--ls-spacing-sm);
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .card-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-media {
+    aspect-ratio: 3/2;
+  }
+  
+  .card-chips {
+    justify-content: center;
+  }
+}
+
+/* ======================= ACCESSIBILITY ======================= */
+
+.card-landscape:focus-within {
+  outline: 3px solid var(--ls-primary);
+  outline-offset: 2px;
+}
+
+.card-btn:focus {
+  outline: 2px solid var(--ls-white);
+  outline-offset: 2px;
+}
+
+.card-chip:focus {
+  outline: 2px solid var(--ls-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-landscape {
+    border: 2px solid var(--ls-primary);
+  }
+  
+  .card-btn {
+    border: 2px solid var(--ls-primary);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .card-landscape,
+  .card-media img,
+  .card-btn,
+  .card-chip {
+    transition: none;
+  }
+  
+  .card-landscape:hover {
+    transform: none;
+  }
+  
+  .card-landscape:hover .card-media img {
+    transform: none;
+  }
+}
+
+/* ======================= UTILITY CLASSES ======================= */
+
+.card-landscape .text-center {
+  text-align: center;
+}
+
+.card-landscape .text-left {
+  text-align: left;
+}
+
+.card-landscape .text-right {
+  text-align: right;
+}
+
+.card-landscape .mb-0 {
+  margin-bottom: 0;
+}
+
+.card-landscape .mt-auto {
+  margin-top: auto;
+}
+
+/* ======================= ANIMATION ENHANCEMENTS ======================= */
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-landscape {
+  animation: cardFadeIn 0.6s ease-out;
+  will-change: transform, box-shadow;
+}
+
+.card-landscape:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.card-landscape:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.card-landscape:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.card-landscape:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.card-landscape:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+/* Subtle lift and sheen on hover for all cards */
+.card-landscape:not(.service)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg) translateX(-100%);
+  transition: transform .6s ease;
+  pointer-events: none;
+}
+
+.card-landscape:not(.service):hover::after { transform: skewX(-20deg) translateX(300%); }
+
+/* Ensure service variant remains as-is but benefits from global typography */
+.card-landscape.service .card-title { 
+  color: #000000;
+  font-size: 1.5rem; /* restore original */
+  font-family: inherit;
+}
+.card-landscape.service .card-subtitle {
+  font-size: 1rem; /* restore original */
+}
+.card-landscape.service .card-text {
+  font-size: 1rem; /* restore original */
+  line-height: 1.6; /* restore original */
+}

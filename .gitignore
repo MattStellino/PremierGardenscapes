@@ -28,8 +28,9 @@ Thumbs.db
 
 # Static and media
 staticfiles/
-static/
 media/
+# Note: We DO want to track main/static/ (app static files)
+# Only ignore collected staticfiles/ at root
 
 # Logs
 *.log
