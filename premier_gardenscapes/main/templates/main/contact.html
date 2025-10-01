@@ -1,0 +1,43 @@
+{% load static %}
+
+<div class="page-section bg-modern-green" id="contact">
+    <div class="contact-card section-fade">
+        <div class="card-body">
+            <h1 class="text-center">Contact Us</h1>
+            <hr class="section-divider">
+            <p class="text-left">We'd love to hear from you! Reach out via phone, email, or social media.</p>
+            <p class="text-left">Phone: (555) 123-4567</p>
+            <div class="mt-3 text-left">
+                <a href="https://www.instagram.com/premier_gardenscapes/" class="me-3 text-dark" target="_blank" rel="noopener" title="Instagram">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+                <a href="https://www.facebook.com/people/Premier-Gardenscapes/pfbid02NtqQTHuf8Wf1e5uYYRqVk64SaBupjgmqeD4DM9apCwvQsBuAuj95wfvp1G1Vt5hyl/" class="me-3 text-dark" target="_blank" rel="noopener" title="Facebook">
+                    <i class="fab fa-facebook fa-lg"></i>
+                </a>
+            </div>
+            <hr>
+            {% if success %}
+                <div class="alert alert-success" role="alert">✅ Your message has been sent successfully!</div>
+            {% elif error %}
+                <div class="alert alert-danger" role="alert">❌ {{ error }}</div>
+            {% endif %}
+            <div id="formResponse" class="alert d-none" role="alert"></div>
+            <form id="contactForm">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="contact_info" class="form-label">Phone or Email (required)</label>
+                    <input type="text" class="form-control" id="contact_info" name="contact_info" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="2" required></textarea>
+                </div>
+                <button type="submit" class="quote-button">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

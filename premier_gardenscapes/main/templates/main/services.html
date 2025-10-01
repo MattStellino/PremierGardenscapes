@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Services • Premier Gardenscapes{% endblock %}
+
+{% block content %}
+<div class="page-section bg-modern-green" id="services">
+    <div class="services-card section-fade">
+        <h1 class="text-center mb-4">Our Services</h1>
+        <hr class="section-divider">
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm service-card">
+                    <div class="card-body">
+                        <h4 class="card-title">Lawn Maintenance</h4>
+                        <p class="card-text">Mowing, edging, and fertilizing to keep your lawn lush and green year-round.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm service-card">
+                    <div class="card-body">
+                        <h4 class="card-title">Garden Design</h4>
+                        <p class="card-text">Custom garden designs to transform your outdoor space into a retreat.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm service-card">
+                    <div class="card-body">
+                        <h4 class="card-title">Planting & Flower Beds</h4>
+                        <p class="card-text">Seasonal planting, garden bed design, and perennial care to keep your gardens vibrant and healthy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

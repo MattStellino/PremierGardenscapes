@@ -1,0 +1,54 @@
+---
+alwaysApply: true
+description: Premier Gardenscapes Django project structure and architecture guide
+---
+
+# Premier Gardenscapes Project Structure
+
+## Project Overview
+This is a Django-based landscaping business website with a modern, nature-inspired design system. The project uses a single-page application approach with all content sections on the home page.
+
+## Core Architecture
+
+### Main Entry Points
+- **Django Settings**: [premier_gardenscapes/settings.py](mdc:premier_gardenscapes/settings.py) - Main configuration with environment variables
+- **URL Configuration**: [premier_gardenscapes/urls.py](mdc:premier_gardenscapes/urls.py) - Root URL routing
+- **Main App URLs**: [main/urls.py](mdc:main/urls.py) - App-specific routing (single-page design)
+- **Main View**: [main/views.py](mdc:main/views.py) - Home page view with contact form handling
+
+### Template System
+- **Base Template**: [main/templates/base.html](mdc:main/templates/base.html) - Master template with navigation, modals, and JavaScript
+- **Home Template**: [main/templates/main/home.html](mdc:main/templates/main/home.html) - Single-page content
+- **Partials**: [main/templates/_partials/](mdc:main/templates/_partials/) - Reusable components (navbar, footer, alerts)
+
+### Static Assets
+- **Main Styles**: [main/static/main/css/styles.css](mdc:main/static/main/css/styles.css) - Legacy styles
+- **Card System**: [main/static/main/css/cards.css](mdc:main/static/main/css/cards.css) - Modern card design system
+- **Images**: [main/static/main/images/](mdc:main/static/main/images/) - Business photos and assets
+
+### Key Features
+- **Single-Page Design**: All content (home, about, services, gallery, contact) on one page
+- **Contact Form**: AJAX-powered form with email integration
+- **Image Gallery**: Fullscreen modal with navigation and swipe support
+- **Responsive Design**: Bootstrap 5 with custom landscaping theme
+- **Card System**: Modern design system documented in [CARDS_README.md](mdc:CARDS_README.md)
+
+## Development Patterns
+- Environment variables via python-decouple
+- WhiteNoise for static file serving
+- SQLite database for development
+- Email backend configuration for contact forms
+- Security middleware stack
+
+## File Organization
+```
+premier_gardenscapes/
+├── main/                    # Main Django app
+│   ├── templates/          # Template files
+│   ├── static/            # Static assets
+│   ├── views.py           # View logic
+│   ├── forms.py           # Django forms
+│   └── models.py          # Database models (currently empty)
+├── premier_gardenscapes/   # Project settings
+└── staticfiles/           # Collected static files
+```

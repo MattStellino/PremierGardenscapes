@@ -1,0 +1,188 @@
+---
+description: Development workflow, deployment, and maintenance patterns for Premier Gardenscapes
+---
+
+# Development Workflow & Deployment
+
+## Local Development Setup
+
+### Environment Setup
+1. **Virtual Environment**: Use the existing `venv/` directory
+2. **Dependencies**: Install from [requirements.txt](mdc:requirements.txt)
+3. **Environment Variables**: Create `.env` file with:
+   ```
+   SECRET_KEY=your-secret-key-here
+   DEBUG=True
+   ALLOWED_HOSTS=localhost,127.0.0.1
+   EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+   CONTACT_EMAIL=contact@premiergardenscapes.com
+   ```
+
+### Database Management
+- **Development**: SQLite database at `db.sqlite3`
+- **Migrations**: Run `python manage.py makemigrations` and `python manage.py migrate`
+- **Admin**: Access at `/admin/` (create superuser with `python manage.py createsuperuser`)
+
+### Static Files
+- **Development**: Files served from `main/static/`
+- **Production**: Run `python manage.py collectstatic` to populate `staticfiles/`
+- **WhiteNoise**: Handles static file serving in production
+
+## Development Commands
+
+### Essential Commands
+```bash
+# Start development server
+python manage.py runserver
+
+# Create and apply migrations
+python manage.py makemigrations
+python manage.py migrate
+
+# Collect static files
+python manage.py collectstatic
+
+# Create superuser
+python manage.py createsuperuser
+
+# Run tests
+python manage.py test
+```
+
+### Database Operations
+```bash
+# Reset database (development only)
+rm db.sqlite3
+python manage.py migrate
+
+# Load sample data
+python manage.py loaddata fixtures/sample_data.json
+```
+
+## Code Quality & Testing
+
+### Testing Strategy
+- **Unit Tests**: Test forms, views, and models
+- **Template Tests**: Verify template rendering
+- **Integration Tests**: Test contact form functionality
+- **Manual Testing**: Test responsive design and user interactions
+
+### Code Review Checklist
+- [ ] Django forms include proper validation
+- [ ] Templates use semantic HTML
+- [ ] Static files use `{% static %}` template tag
+- [ ] CSRF tokens included in forms
+- [ ] Error handling implemented
+- [ ] Responsive design tested
+- [ ] Accessibility standards met
+
+## Deployment Considerations
+
+### Production Settings
+- Set `DEBUG=False`
+- Use environment variables for sensitive data
+- Configure proper email backend
+- Set up SSL certificates
+- Configure static file serving
+
+### Security Checklist
+- [ ] `SECRET_KEY` is properly set
+- [ ] `DEBUG=False` in production
+- [ ] `ALLOWED_HOSTS` configured
+- [ ] CSRF protection enabled
+- [ ] XSS protection enabled
+- [ ] Content type sniffing disabled
+
+### Performance Optimization
+- [ ] Static files compressed with WhiteNoise
+- [ ] Images optimized for web
+- [ ] Database queries optimized
+- [ ] Caching implemented where appropriate
+
+## Maintenance Patterns
+
+### Regular Tasks
+- **Weekly**: Check for Django security updates
+- **Monthly**: Review and update dependencies
+- **Quarterly**: Update content and images
+- **Annually**: Review and update business information
+
+### Content Updates
+- **Service Information**: Update service cards and descriptions
+- **Gallery**: Add new before/after photos
+- **Contact Information**: Keep phone, email, and address current
+- **Testimonials**: Add new customer reviews
+
+### Technical Maintenance
+- **Dependencies**: Update packages in `requirements.txt`
+- **Database**: Backup and optimize database
+- **Static Files**: Re-collect static files after changes
+- **Logs**: Monitor error logs and performance
+
+## Troubleshooting Common Issues
+
+### Static Files Not Loading
+1. Check `STATIC_URL` and `STATIC_ROOT` settings
+2. Run `python manage.py collectstatic`
+3. Verify WhiteNoise configuration
+4. Check file permissions
+
+### Contact Form Not Working
+1. Verify email settings in `.env`
+2. Check CSRF token in form
+3. Test email backend configuration
+4. Review form validation logic
+
+### Template Rendering Issues
+1. Check template inheritance from `base.html`
+2. Verify static file loading with `{% load static %}`
+3. Check for template syntax errors
+4. Validate HTML structure
+
+### Database Issues
+1. Run migrations: `python manage.py migrate`
+2. Check database file permissions
+3. Verify model field definitions
+4. Test database connectivity
+
+## Version Control Best Practices
+
+### Git Workflow
+- Use feature branches for new development
+- Commit frequently with descriptive messages
+- Test changes before merging to main
+- Keep `.env` files out of version control
+
+### File Organization
+- Keep templates organized by app
+- Group related static files together
+- Use descriptive file and directory names
+- Document complex functionality
+
+## Monitoring & Analytics
+
+### Error Tracking
+- Monitor Django error logs
+- Set up email notifications for critical errors
+- Track form submission failures
+- Monitor performance metrics
+
+### User Analytics
+- Track page views and user interactions
+- Monitor contact form conversion rates
+- Analyze mobile vs desktop usage
+- Track popular service pages
+
+## Backup & Recovery
+
+### Database Backups
+- Regular SQLite database backups
+- Export critical data to JSON fixtures
+- Test backup restoration procedures
+- Store backups securely
+
+### Static File Backups
+- Backup uploaded images and documents
+- Version control for template and CSS changes
+- Document custom configurations
+- Maintain deployment scripts

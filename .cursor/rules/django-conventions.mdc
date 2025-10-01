@@ -1,0 +1,122 @@
+---
+globs: *.py,*.html
+description: Django development conventions and best practices for Premier Gardenscapes
+---
+
+# Django Development Conventions
+
+## Code Style & Structure
+
+### Python Files
+- Use descriptive docstrings for all functions and classes
+- Follow PEP 8 style guidelines
+- Use type hints where appropriate
+- Group imports: standard library, third-party, local imports
+
+### Views Pattern
+```python
+def view_name(request):
+    """
+    Brief description of what this view does.
+    
+    Args:
+        request: Django HttpRequest object
+        
+    Returns:
+        HttpResponse: Rendered template with context
+    """
+    # Implementation here
+```
+
+### Forms Pattern
+- Always define custom `clean_*` methods for validation
+- Use descriptive help_text and labels
+- Include proper widget attributes for styling
+- Example from [main/forms.py](mdc:main/forms.py)
+
+### Template Conventions
+- Use `{% load static %}` for static files
+- Extend from [base.html](mdc:main/templates/base.html) for consistency
+- Use semantic HTML5 elements
+- Include proper ARIA labels for accessibility
+
+## Environment & Configuration
+
+### Settings Management
+- Use environment variables via `python-decouple`
+- Never commit sensitive data to version control
+- Use `.env` file for local development
+- Reference [premier_gardenscapes/settings.py](mdc:premier_gardenscapes/settings.py) for patterns
+
+### Static Files
+- Use `{% static %}` template tag for all static file references
+- Organize static files by app: `main/static/main/`
+- Use WhiteNoise for production static file serving
+- Run `python manage.py collectstatic` before deployment
+
+## Security Best Practices
+
+### CSRF Protection
+- Always use `{% csrf_token %}` in forms
+- Include CSRF token in AJAX requests (see [base.html](mdc:main/templates/base.html) JavaScript)
+
+### Input Validation
+- Use Django forms for all user input
+- Implement server-side validation in form `clean_*` methods
+- Sanitize user input before database operations
+
+### Email Configuration
+- Use environment variables for email settings
+- Implement proper error handling for email sending
+- Use Django's built-in email backends
+
+## Database Patterns
+
+### Models
+- Use descriptive field names
+- Include help_text for documentation
+- Use appropriate field types and constraints
+- Add `__str__` methods for admin interface
+
+### Migrations
+- Create migrations for all model changes
+- Use descriptive migration names
+- Test migrations on development data
+
+## Error Handling
+
+### Views
+- Use try-catch blocks for external operations (email sending)
+- Provide user-friendly error messages
+- Log errors appropriately
+- Return appropriate HTTP status codes
+
+### Templates
+- Use `{% if %}` blocks to handle missing context variables
+- Provide fallback content for optional elements
+- Use `{% empty %}` for empty querysets
+
+## Performance Considerations
+
+### Database Queries
+- Use `select_related()` and `prefetch_related()` for foreign keys
+- Avoid N+1 query problems
+- Use database indexes for frequently queried fields
+
+### Static Files
+- Use `loading="lazy"` for images below the fold
+- Compress CSS and JavaScript files
+- Use CDN for external libraries (Bootstrap, Font Awesome)
+
+## Testing Patterns
+
+### Unit Tests
+- Test form validation logic
+- Test view responses and context
+- Test email sending functionality
+- Use Django's TestCase for database operations
+
+### Template Tests
+- Test template rendering with various contexts
+- Test form error handling in templates
+- Test responsive design at different breakpoints

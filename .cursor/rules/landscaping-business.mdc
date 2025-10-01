@@ -1,0 +1,173 @@
+---
+description: Landscaping business-specific patterns, content structure, and industry conventions
+---
+
+# Landscaping Business Patterns
+
+## Business Context
+Premier Gardenscapes is a landscaping business website focused on:
+- **Services**: Landscaping, garden design, property maintenance
+- **Target Audience**: Homeowners and property managers
+- **Key Features**: Free estimates, seasonal services, before/after galleries
+
+## Content Structure Patterns
+
+### Service Categories
+Organize services by type:
+- **Softscaping**: Plants, flowers, trees, shrubs
+- **Hardscaping**: Patios, walkways, retaining walls, water features
+- **Maintenance**: Lawn care, pruning, seasonal cleanup
+- **Design**: Landscape planning, consultation, 3D visualization
+
+### Service Card Content
+```html
+<div class="card-landscape service h-100">
+  <div class="card-media">
+    <img src="{% static 'main/images/softscaping.jpg' %}" 
+         alt="Softscaping Services" 
+         loading="lazy">
+  </div>
+  <div class="card-body">
+    <div class="card-subtitle">Softscaping</div>
+    <h4 class="card-title">Plant Installation & Design</h4>
+    <p class="card-text">Transform your outdoor space with our expert plant selection and installation services.</p>
+    <div class="card-chips">
+      <span class="card-chip">Free Estimate</span>
+      <span class="card-chip">Seasonal</span>
+      <span class="card-chip">Warranty</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="card-actions">
+      <a href="#contact" class="card-btn">
+        <i class="fas fa-phone"></i>
+        Get Free Quote
+      </a>
+    </div>
+  </div>
+</div>
+```
+
+## Industry-Specific Features
+
+### Before/After Galleries
+- Use high-quality images showing project transformations
+- Include project descriptions and timelines
+- Organize by service type or project size
+- Reference images in [main/static/main/images/](mdc:main/static/main/images/)
+
+### Contact Form Fields
+Standard landscaping inquiry form should include:
+- **Name**: Customer's full name
+- **Contact Info**: Phone and/or email
+- **Property Address**: For site visits
+- **Project Type**: Dropdown of service categories
+- **Timeline**: When they want work completed
+- **Budget Range**: Optional budget information
+- **Message**: Detailed project description
+
+### Service Call-to-Actions
+Common CTAs for landscaping businesses:
+- "Get Free Estimate"
+- "Schedule Consultation"
+- "View Our Work"
+- "Call Now"
+- "Request Quote"
+
+## Seasonal Content Patterns
+
+### Service Availability
+- **Spring**: Planting, cleanup, design planning
+- **Summer**: Maintenance, irrigation, hardscaping
+- **Fall**: Cleanup, preparation, tree services
+- **Winter**: Planning, consultations, indoor plants
+
+### Seasonal Messaging
+```html
+<div class="card-chip seasonal-spring">Spring Special</div>
+<div class="card-chip seasonal-fall">Fall Cleanup</div>
+<div class="card-chip year-round">Year Round</div>
+```
+
+## Image Management
+
+### Image Categories
+Organize images by purpose:
+- **Hero Images**: Large, impactful landscape photos
+- **Service Images**: Specific to each service type
+- **Before/After**: Project transformation photos
+- **Team Photos**: Staff and equipment
+- **Logo/Branding**: Company identity assets
+
+### Image Optimization
+- Use descriptive alt text for accessibility
+- Implement lazy loading for gallery images
+- Provide multiple sizes for responsive design
+- Use WebP format when possible
+
+## SEO & Marketing Patterns
+
+### Page Titles
+Follow this pattern: `Service Name - Premier Gardenscapes`
+Examples:
+- "Landscaping Services - Premier Gardenscapes"
+- "Garden Design - Premier Gardenscapes"
+- "Property Maintenance - Premier Gardenscapes"
+
+### Meta Descriptions
+Include location and key services:
+```html
+<meta name="description" content="Premier Gardenscapes offers professional landscaping, garden design, and property maintenance services. Get a free estimate today.">
+```
+
+### Local SEO Elements
+- Include service area information
+- Add local business schema markup
+- Use location-specific keywords
+- Include contact information prominently
+
+## Content Writing Guidelines
+
+### Service Descriptions
+- Focus on benefits, not just features
+- Use action-oriented language
+- Include specific details (materials, timeline, warranty)
+- Address common customer concerns
+
+### Call-to-Action Language
+- Use urgency when appropriate ("Limited time", "Seasonal")
+- Emphasize free consultations and estimates
+- Include contact methods (phone, email, form)
+- Make it easy to take action
+
+## Customer Journey Patterns
+
+### Awareness Stage
+- Showcase portfolio and before/after photos
+- Highlight expertise and experience
+- Provide educational content about landscaping
+
+### Consideration Stage
+- Offer free consultations and estimates
+- Provide detailed service information
+- Share customer testimonials and reviews
+
+### Decision Stage
+- Make contact information easily accessible
+- Provide multiple ways to get quotes
+- Offer guarantees and warranties
+- Showcase professional credentials
+
+## Technical Considerations
+
+### Performance
+- Optimize images for web (landscaping photos can be large)
+- Use lazy loading for gallery images
+- Implement proper caching for static assets
+- Consider CDN for image delivery
+
+### Mobile Experience
+- Ensure forms work well on mobile devices
+- Optimize image galleries for touch interaction
+- Make contact information easily tappable
+- Test on various device sizes

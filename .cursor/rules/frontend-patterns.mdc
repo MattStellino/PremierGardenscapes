@@ -1,0 +1,212 @@
+---
+globs: *.html,*.css,*.js
+description: Frontend patterns, card system, and UI conventions for Premier Gardenscapes
+---
+
+# Frontend Patterns & Design System
+
+## Card Design System
+
+### Overview
+The project uses a custom card design system documented in [CARDS_README.md](mdc:CARDS_README.md). This system provides consistent, nature-inspired styling for all content cards.
+
+### Card Variants
+- **Default**: `.card-landscape` - Clean white cards with green accents
+- **Service**: `.card-landscape.service` - Special styling for service offerings
+- **Brown**: `.card-landscape.brown` - Earth-tone variant for hardscaping
+- **Compact**: `.card-landscape.compact` - Smaller version for testimonials
+
+### Card Structure
+```html
+<div class="col-12 col-sm-6 col-lg-4">
+  <div class="card-landscape service h-100">
+    <div class="card-media">
+      <img src="{% static 'main/images/service.jpg' %}" 
+           alt="Service Name" 
+           loading="lazy">
+    </div>
+    <div class="card-body">
+      <div class="card-subtitle">Category</div>
+      <h4 class="card-title">Service Title</h4>
+      <p class="card-text">Service description.</p>
+      <div class="card-chips">
+        <span class="card-chip">Free Estimate</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-actions">
+        <a href="#contact" class="card-btn">
+          <i class="fas fa-phone"></i>
+          Get Quote
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+## CSS Architecture
+
+### File Organization
+- **Base Styles**: [main/static/main/css/styles.css](mdc:main/static/main/css/styles.css) - Legacy styles
+- **Card System**: [main/static/main/css/cards.css](mdc:main/static/main/css/cards.css) - Modern design system
+- **Inline Styles**: Critical CSS in [base.html](mdc:main/templates/base.html) for performance
+
+### CSS Variables
+Use the established color palette:
+```css
+:root {
+  --ls-primary: #2d5a4a;        /* Deep forest green */
+  --ls-primary-light: #4a7c59;  /* Medium green */
+  --ls-accent: #8b4513;         /* Rich earth brown */
+  --ls-earth: #8b7355;          /* Natural brown */
+  --ls-sand: #f4e4c1;           /* Light sand */
+  --ls-cream: #faf8f3;          /* Off-white cream */
+}
+```
+
+## Template Patterns
+
+### Base Template Structure
+Always extend from [base.html](mdc:main/templates/base.html):
+```html
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Page Title - Premier Gardenscapes{% endblock %}
+
+{% block content %}
+<!-- Page content here -->
+{% endblock %}
+```
+
+### Static File Loading
+```html
+{% load static %}
+<img src="{% static 'main/images/image.jpg' %}" alt="Description">
+<link rel="stylesheet" href="{% static 'main/css/custom.css' %}">
+```
+
+### Bootstrap Integration
+- Use Bootstrap 5 grid system: `col-12 col-sm-6 col-lg-4`
+- Leverage Bootstrap components: modals, carousels, forms
+- Customize with CSS variables and custom classes
+
+## JavaScript Patterns
+
+### Event Handling
+Use the established patterns from [base.html](mdc:main/templates/base.html):
+```javascript
+document.addEventListener("DOMContentLoaded", function () {
+    // Initialize components
+    const elements = document.querySelectorAll('.selector');
+    elements.forEach(element => {
+        // Setup event listeners
+    });
+});
+```
+
+### AJAX Forms
+Follow the contact form pattern:
+```javascript
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+    
+    fetch("/", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+        },
+        body: formData
+    })
+    .then(response => response.text())
+    .then(html => {
+        // Handle success response
+    })
+    .catch(err => {
+        // Handle error
+    });
+});
+```
+
+## Responsive Design
+
+### Breakpoint Strategy
+- **Mobile**: `< 576px` - Stacked layout, smaller text
+- **Tablet**: `576px - 768px` - 2-column layout  
+- **Desktop**: `> 768px` - 3-column layout
+
+### Grid Classes
+```html
+<div class="row">
+  <div class="col-12 col-sm-6 col-lg-4">
+    <!-- Card content -->
+  </div>
+</div>
+```
+
+## Accessibility Standards
+
+### Semantic HTML
+- Use proper heading hierarchy (h1, h2, h3, h4)
+- Include alt text for all images
+- Use semantic elements: `<nav>`, `<main>`, `<section>`, `<article>`
+
+### ARIA Labels
+```html
+<button type="button" aria-label="Previous image">
+  <i class="fas fa-chevron-left"></i>
+</button>
+```
+
+### Focus Management
+- Ensure keyboard navigation works
+- Provide visible focus states
+- Use `tabindex` appropriately
+
+## Image Optimization
+
+### Lazy Loading
+```html
+<img src="{% static 'main/images/image.jpg' %}" 
+     alt="Description" 
+     loading="lazy">
+```
+
+### Responsive Images
+```html
+<img src="{% static 'main/images/image.jpg' %}" 
+     alt="Description"
+     class="img-fluid"
+     style="max-height: 90vh; object-fit: contain;">
+```
+
+## Animation & Interactions
+
+### Scroll Animations
+Use the established intersection observer pattern:
+```javascript
+const faders = document.querySelectorAll(".section-fade, .card-landscape");
+const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+```
+
+### Hover Effects
+Leverage CSS transitions for smooth interactions:
+```css
+.card-landscape {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-landscape:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ls-shadow-hover);
+}
+```

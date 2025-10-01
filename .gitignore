@@ -1,0 +1,40 @@
+# Django
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+.venv
+env.bak/
+venv.bak/
+
+# VS Code settings
+.vscode/
+.idea/
+*.code-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Secrets and environment variables
+.env
+.env.*
+
+# Static and media
+staticfiles/
+static/
+media/
+
+# Logs
+*.log
+
+# Migrations (optional, only if you want to ignore)
+# **Uncomment if you don’t want to track migrations!**
+# */migrations/
+# !*/migrations/__init__.py

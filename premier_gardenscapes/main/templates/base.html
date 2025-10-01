@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>{% block title %}Premier Gardenscapes{% endblock %}</title>
+    
+    <!-- CSS Dependencies -->
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/cards.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous">
+    {% block extra_css %}{% endblock %}
+
+    <!-- SEO & Social Meta Tags -->
+    {% block meta %}
+    <meta name="description" content="Premier Gardenscapes offers professional landscaping, garden design, and property maintenance services. Transform your outdoor space with our expert care. Get a free quote today.">
+    <meta name="keywords" content="landscaping, garden design, property maintenance, lawn care, planting, outdoor design, Premier Gardenscapes">
+    <meta name="author" content="Premier Gardenscapes">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% block og_title %}Premier Gardenscapes - Professional Landscaping Services{% endblock %}">
+    <meta property="og:description" content="Transform your outdoor space with Premier Gardenscapes. Expert landscaping, garden design, and property maintenance services. Free estimates available.">
+    <meta property="og:image" content="{% static 'main/images/logo.png' %}">
+    <meta property="og:site_name" content="Premier Gardenscapes">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta property="twitter:title" content="{% block twitter_title %}Premier Gardenscapes - Professional Landscaping{% endblock %}">
+    <meta property="twitter:description" content="Expert landscaping, garden design, and property maintenance. Transform your outdoor space today.">
+    <meta property="twitter:image" content="{% static 'main/images/logo.png' %}">
+    
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Premier Gardenscapes",
+      "description": "Professional landscaping, garden design, and property maintenance services",
+      "url": "{{ request.build_absolute_uri }}",
+      "logo": "{% static 'main/images/logo.png' %}",
+      "image": "{% static 'main/images/background.jpeg' %}",
+      "telephone": "(555) 123-4567",
+      "email": "contact@premiergardenscapes.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Your City",
+        "addressRegion": "Your State",
+        "addressCountry": "US"
+      },
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "40.7128",
+          "longitude": "-74.0060"
+        },
+        "geoRadius": "50000"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Landscaping Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Lawn Maintenance",
+              "description": "Professional lawn care including mowing, edging, and fertilizing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Garden Design",
+              "description": "Custom garden designs to transform your outdoor space"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Planting & Flower Beds",
+              "description": "Seasonal planting and garden bed design services"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    {% endblock %}
+
+    <!-- Inline Styles for Critical UI Elements -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body { 
+            font-family: 'Inter', 'Oswald', sans-serif; 
+            margin: 0; 
+            overflow-x: hidden; 
+            /* Performance optimizations */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        
+        /* Modern Navbar Styling */
+        .navbar { 
+            background-color: rgba(255,255,255,0.98) !important; 
+            backdrop-filter: saturate(180%) blur(8px); 
+            z-index: 1000; 
+            min-height: 72px; 
+            padding: .5rem 0; 
+            transition: top .3s, box-shadow .3s; 
+            box-shadow: 0 1px 0 rgba(99,112,104,0.12); 
+        }
+        
+        .navbar-brand-text { 
+            font-size: 1.6rem; 
+            color: #000000; 
+            letter-spacing: .04em; 
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .navbar-nav .nav-link { 
+            color: #000000; 
+            font-size: 1.05rem; 
+            font-weight: 500; 
+            font-family: 'Oswald', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #4a7c59;
+            transform: translateY(-1px);
+        }
+        
+        .navbar-toggler { 
+            border: none; 
+            background: none; 
+        }
+        
+        .navbar-toggler-icon { 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='black' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' /%3E%3C/svg%3E"); 
+        }
+        
+        /* Enhanced navbar centering */
+        .navbar .container-fluid {
+            position: relative;
+        }
+        
+        .navbar-nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 991.98px) { 
+            .navbar { 
+                min-height: 56px !important; 
+                padding-top: .25rem !important; 
+                padding-bottom: .25rem !important; 
+            }
+            
+            .navbar-nav {
+                position: static;
+                transform: none;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    {% include '_partials/navbar.html' %}
+
+    <!-- Alert Messages -->
+    {% include '_partials/alerts.html' %}
+
+    <!-- Image Modal for Gallery -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-dark text-center position-relative" style="border: none; box-shadow: none;">
+                <button type="button" class="btn-close btn-close-white position-absolute" data-bs-dismiss="modal" aria-label="Close" style="top: 14px; right: 18px; transform: scale(1.3);"></button>
+                <!-- Modal gallery nav controls -->
+                <button id="modalPrev" type="button" aria-label="Previous image" class="position-absolute" style="left: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.35); background: rgba(0,0,0,0.35); color: #fff; z-index: 2;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="modalNext" type="button" aria-label="Next image" class="position-absolute" style="right: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.35); background: rgba(0,0,0,0.35); color: #fff; z-index: 2;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <img id="modalImage" src="" class="img-fluid rounded mx-auto d-block" alt="Fullscreen Image" style="max-height: 90vh; object-fit: contain;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+            crossorigin="anonymous" defer></script>
+    {% block extra_js %}{% endblock %}
+
+    <!-- Enhanced Contact Form AJAX Handler with Validation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("contactForm");
+            if (!form) return;
+
+            // Form validation functions
+            function validateName(name) {
+                const trimmed = name.trim();
+                if (trimmed.length < 2) return "Name must be at least 2 characters long";
+                if (trimmed.length > 100) return "Name must be less than 100 characters";
+                if (!/^[a-zA-Z\s\-'\.]+$/.test(trimmed)) return "Name contains invalid characters";
+                return null;
+            }
+
+            function validateContact(contact) {
+                const trimmed = contact.trim();
+                if (trimmed.length < 5) return "Contact info must be at least 5 characters";
+                if (trimmed.length > 100) return "Contact info must be less than 100 characters";
+                
+                // Check if it's an email or phone
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                const cleanPhone = trimmed.replace(/[\s\-\(\)\.]/g, '');
+                
+                if (!emailRegex.test(trimmed) && !phoneRegex.test(cleanPhone)) {
+                    return "Please enter a valid email address or phone number (e.g., john@email.com or (555) 123-4567)";
+                }
+                return null;
+            }
+
+            function validateMessage(message) {
+                const trimmed = message.trim();
+                if (trimmed.length === 0) return "Please enter your project details";
+                if (trimmed.length > 1000) return "Message must be less than 1000 characters";
+                return null;
+            }
+
+            function showFieldError(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                const errorDiv = document.getElementById(fieldId + '-error');
+                if (field && errorDiv) {
+                    field.classList.add('is-invalid');
+                    field.classList.remove('is-valid');
+                    errorDiv.textContent = message;
+                }
+            }
+
+            function showFieldSuccess(fieldId) {
+                const field = document.getElementById(fieldId);
+                const errorDiv = document.getElementById(fieldId + '-error');
+                if (field && errorDiv) {
+                    field.classList.add('is-valid');
+                    field.classList.remove('is-invalid');
+                    errorDiv.textContent = '';
+                }
+            }
+
+            function clearAllErrors() {
+                const fields = ['name', 'contact_info', 'message'];
+                fields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    const errorDiv = document.getElementById(fieldId + '-error');
+                    if (field && errorDiv) {
+                        field.classList.remove('is-invalid', 'is-valid');
+                        errorDiv.textContent = '';
+                    }
+                });
+            }
+
+            // Real-time validation
+            const nameField = document.getElementById('name');
+            const contactField = document.getElementById('contact_info');
+            const messageField = document.getElementById('message');
+
+            nameField.addEventListener('blur', function() {
+                const error = validateName(this.value);
+                if (error) {
+                    showFieldError('name', error);
+                } else if (this.value.trim()) {
+                    showFieldSuccess('name');
+                }
+            });
+
+            contactField.addEventListener('blur', function() {
+                const error = validateContact(this.value);
+                if (error) {
+                    showFieldError('contact_info', error);
+                } else if (this.value.trim()) {
+                    showFieldSuccess('contact_info');
+                }
+            });
+
+            messageField.addEventListener('blur', function() {
+                const error = validateMessage(this.value);
+                if (error) {
+                    showFieldError('message', error);
+                } else if (this.value.trim()) {
+                    showFieldSuccess('message');
+                }
+            });
+
+            // Real-time validation as user types
+            if (nameField) {
+                nameField.addEventListener("blur", function() {
+                    const error = validateName(this.value);
+                    if (error) {
+                        showFieldError("name", error);
+                    } else if (this.value.trim()) {
+                        showFieldSuccess("name");
+                    }
+                });
+                
+                nameField.addEventListener("input", function() {
+                    if (this.classList.contains("is-invalid") && this.value.trim()) {
+                        const error = validateName(this.value);
+                        if (!error) {
+                            showFieldSuccess("name");
+                        }
+                    }
+                });
+            }
+            
+            if (contactField) {
+                contactField.addEventListener("blur", function() {
+                    const error = validateContact(this.value);
+                    if (error) {
+                        showFieldError("contact_info", error);
+                    } else if (this.value.trim()) {
+                        showFieldSuccess("contact_info");
+                    }
+                });
+                
+                contactField.addEventListener("input", function() {
+                    if (this.classList.contains("is-invalid") && this.value.trim()) {
+                        const error = validateContact(this.value);
+                        if (!error) {
+                            showFieldSuccess("contact_info");
+                        }
+                    }
+                });
+            }
+            
+            if (messageField) {
+                messageField.addEventListener("blur", function() {
+                    const error = validateMessage(this.value);
+                    if (error) {
+                        showFieldError("message", error);
+                    } else if (this.value.trim()) {
+                        showFieldSuccess("message");
+                    }
+                });
+                
+                messageField.addEventListener("input", function() {
+                    if (this.classList.contains("is-invalid") && this.value.trim()) {
+                        const error = validateMessage(this.value);
+                        if (!error) {
+                            showFieldSuccess("message");
+                        }
+                    }
+                });
+            }
+
+            // Form submission
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                clearAllErrors();
+
+                // Validate all fields
+                const name = nameField.value.trim();
+                const contact = contactField.value.trim();
+                const message = messageField.value.trim();
+
+                let hasErrors = false;
+
+                const nameError = validateName(name);
+                if (nameError) {
+                    showFieldError('name', nameError);
+                    hasErrors = true;
+                }
+
+                const contactError = validateContact(contact);
+                if (contactError) {
+                    showFieldError('contact_info', contactError);
+                    hasErrors = true;
+                }
+
+                const messageError = validateMessage(message);
+                if (messageError) {
+                    showFieldError('message', messageError);
+                    hasErrors = true;
+                }
+
+                if (hasErrors) {
+                    // Focus first error field
+                    const firstError = form.querySelector('.is-invalid');
+                    if (firstError) {
+                        firstError.focus();
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn ? submitBtn.textContent : '';
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+                }
+
+                const formData = new FormData(form);
+                const responseBox = document.getElementById("formResponse");
+
+                fetch("/", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newContact = doc.querySelector("#contact");
+                    if (newContact) {
+                        document.getElementById("contact").innerHTML = newContact.innerHTML;
+                        window.location.hash = "contact";
+                        statusDiv.textContent = 'Message sent successfully!';
+                        statusDiv.className = 'form-text mt-2 text-success';
+                        form.reset();
+                    }
+                })
+                .catch(err => {
+                    responseBox.className = "alert alert-danger";
+                    responseBox.innerHTML = `
+                        <strong>Error:</strong> There was a problem sending your message. 
+                        Please try again or contact us directly at (555) 123-4567.
+                    `;
+                    responseBox.classList.remove("d-none");
+                    statusDiv.textContent = 'Failed to send message. Please try again.';
+                    statusDiv.className = 'form-text mt-2 text-danger';
+                })
+                .finally(() => {
+                    // Reset button state
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Scroll Animation System -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Enhanced scroll animations with better performance and staggered timing
+            const faders = document.querySelectorAll(".section-fade");
+            const cards = document.querySelectorAll(".card-landscape");
+            
+            const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            const cardObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add staggered delay based on card position
+                        const cardContainer = entry.target.closest('.row');
+                        if (cardContainer) {
+                            const cards = cardContainer.querySelectorAll('.card-landscape');
+                            const index = Array.from(cards).indexOf(entry.target);
+                            setTimeout(() => {
+                                entry.target.classList.add("visible");
+                            }, index * 100);
+                        } else {
+                            entry.target.classList.add("visible");
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+            
+            cards.forEach(card => {
+                cardObserver.observe(card);
+            });
+            
+            // Nature background elements scroll interaction
+            const natureSections = document.querySelectorAll('.nature-background');
+            const natureObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('nature-active');
+                        // Trigger nature element animations based on scroll position
+                        const elements = entry.target.querySelectorAll('.nature-element');
+                        elements.forEach((element, index) => {
+                            setTimeout(() => {
+                                element.style.animationPlayState = 'running';
+                                element.style.opacity = '0.6';
+                            }, index * 300);
+                        });
+                    } else {
+                        entry.target.classList.remove('nature-active');
+                        const elements = entry.target.querySelectorAll('.nature-element');
+                        elements.forEach(element => {
+                            element.style.animationPlayState = 'paused';
+                            element.style.opacity = '0.2';
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            natureSections.forEach(section => {
+                natureObserver.observe(section);
+            });
+        });
+    </script>
+
+    <!-- Mobile Navigation Auto-Close -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var mainNav = document.getElementById('mainNav');
+            if (!mainNav) return;
+            var navLinks = mainNav.querySelectorAll('.nav-link');
+            var bsCollapse = new bootstrap.Collapse(mainNav, { toggle: false });
+            navLinks.forEach(function (link) {
+                link.addEventListener('click', function () { bsCollapse.hide(); });
+            });
+        });
+    </script>
+
+    <!-- Smart Navbar Hide/Show on Scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var navbar = document.querySelector('.navbar');
+            var lastScrollTop = 0;
+            var ticking = false;
+            function onScroll() {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 80) {
+                    navbar.style.top = "-120px";
+                } else {
+                    navbar.style.top = "0";
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                ticking = false;
+            }
+            window.addEventListener('scroll', function(){
+                if (!ticking) {
+                    window.requestAnimationFrame(onScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+        });
+    </script>
+
+    <!-- Navigation Link Pulse Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.nav-link').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    this.classList.remove('pulse');
+                    void this.offsetWidth; // Trigger reflow
+                    this.classList.add('pulse');
+                });
+            });
+        });
+    </script>
+
+    <!-- Background Ken Burns subtle animation on scroll (performance-friendly) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var hero = document.querySelector('.hero-media');
+            if (!hero) return;
+            hero.style.willChange = 'transform, opacity';
+            var maxScroll = Math.min(window.innerHeight * 1.5, 1200);
+            var ticking = false;
+            function update() {
+                var y = window.pageYOffset || document.documentElement.scrollTop;
+                var t = Math.max(0, Math.min(1, y / maxScroll));
+                var scale = 1 + t * 0.06; // up to 6% scale
+                var opacity = 1 - t * 0.08; // slight fade
+                hero.style.transform = 'scale(' + scale + ')';
+                hero.style.opacity = String(opacity);
+                ticking = false;
+            }
+            window.addEventListener('scroll', function(){
+                if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+            }, { passive: true });
+            update();
+        });
+    </script>
+
+    <!-- Fullscreen Gallery Viewer (click, arrows, swipe) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modalEl = document.getElementById('imageModal');
+            var modalImg = document.getElementById('modalImage');
+            var prevBtn = document.getElementById('modalPrev');
+            var nextBtn = document.getElementById('modalNext');
+            var images = Array.prototype.slice.call(document.querySelectorAll('#pgCarousel .carousel-item img'));
+            var currentIndex = 0;
+
+            function openAtIndex(index) {
+                if (!images.length) return;
+                currentIndex = ((index % images.length) + images.length) % images.length;
+                modalImg.src = images[currentIndex].src;
+                var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            }
+
+            function show(delta) {
+                if (!images.length) return;
+                currentIndex = (currentIndex + delta + images.length) % images.length;
+                modalImg.src = images[currentIndex].src;
+            }
+
+            // Wire up clicks on gallery images
+            images.forEach(function (img, i) {
+                img.classList.add('fullscreen-img');
+                img.addEventListener('click', function () { openAtIndex(i); });
+            });
+
+            // Expose global for any inline onclicks that may exist
+            window.showImageModal = function (src) {
+                if (!images.length) return;
+                var idx = images.findIndex(function (im) { return im.src === src; });
+                openAtIndex(idx >= 0 ? idx : 0);
+            };
+
+            // Buttons
+            if (prevBtn) prevBtn.addEventListener('click', function(){ show(-1); });
+            if (nextBtn) nextBtn.addEventListener('click', function(){ show(1); });
+
+            // Keyboard arrows while modal open
+            modalEl.addEventListener('shown.bs.modal', function(){ modalEl.focus(); });
+            modalEl.addEventListener('keydown', function(e){
+                if (e.key === 'ArrowLeft') show(-1);
+                if (e.key === 'ArrowRight') show(1);
+            });
+
+            // Swipe support inside modal
+            var startX = 0, startY = 0, dx = 0, dy = 0; var threshold = 40;
+            modalEl.addEventListener('touchstart', function(e){
+                if (!e.touches || e.touches.length === 0) return;
+                startX = e.touches[0].clientX; startY = e.touches[0].clientY; dx = 0; dy = 0;
+            }, { passive: true });
+            modalEl.addEventListener('touchmove', function(e){
+                if (!e.touches || e.touches.length === 0) return;
+                dx = e.touches[0].clientX - startX; dy = e.touches[0].clientY - startY;
+            }, { passive: true });
+            modalEl.addEventListener('touchend', function(){
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+                    if (dx < 0) show(1); else show(-1);
+                }
+            }, { passive: true });
+        });
+    </script>
+
+    <!-- Touch/Swipe support for mobile carousels -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var carouselIds = ['#servicesCarousel', '#pgCarousel'];
+            carouselIds.forEach(function (selector) {
+                var el = document.querySelector(selector);
+                if (!el) return;
+                var startX = 0, startY = 0, deltaX = 0, deltaY = 0;
+                var threshold = 40; // px
+                el.addEventListener('touchstart', function (e) {
+                    if (!e.touches || e.touches.length === 0) return;
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    deltaX = 0; deltaY = 0;
+                }, { passive: true });
+                el.addEventListener('touchmove', function (e) {
+                    if (!e.touches || e.touches.length === 0) return;
+                    deltaX = e.touches[0].clientX - startX;
+                    deltaY = e.touches[0].clientY - startY;
+                }, { passive: true });
+                el.addEventListener('touchend', function (e) {
+                    if (Math.abs(deltaX) < threshold || Math.abs(deltaX) < Math.abs(deltaY)) return;
+                    var carousel = bootstrap.Carousel.getOrCreateInstance(el);
+                    if (deltaX < 0) { carousel.next(); } else { carousel.prev(); }
+                }, { passive: true });
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    {% include '_partials/footer.html' %}
+</body>
+</html>
