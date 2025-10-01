@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'vj+56i48q#553ng_w6f-w)u)-v9war(cg4iinu41l1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,premiergardenscapes.onrender.com').split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -139,6 +139,7 @@ CSRF_COOKIE_SAMESITE = 'Strict'
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
+    'https://premiergardenscapes.onrender.com',
 ]
 
 # Session security
